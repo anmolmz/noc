@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-from selenium import webdriver
-import sys
 
 st.write('''
         # Find your career paths and respective NOC teer!

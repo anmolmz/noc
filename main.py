@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 
 st.write('''
         # Find your career paths and respective NOC teer!
@@ -39,14 +40,32 @@ df = pd.DataFrame()
 # Get the DataFrame based on 'option'(degree) selected by user from drop down menu
 df = option_df_dict.get(option, df) # defaults to empty dataframe until option is selected and we have the key in dictionary
 
+# Retreiving the IP address of user and then location data from IP add. using two APIs ipify and ipapi
+def get_ip(): 
+    response = requests.get('https://api64.ipify.org?format=json').json()
+    return response["ip"]
+
+def get_location(): 
+    ip_address = get_ip()
+    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
+    return response.get("city")
+# It sometimes return None when the program is run initially as the location is not fetched.
+
+city = get_location() 
+ 
+# creating location query to be used for indeed search
+loc_query = '&l=' + str(city)
+
 # Display the information when option is selected
 # Before that create an empty string to store the HTML content because if each row is rendered individually, header and index will appear each time
 html_content = ""
 if option != None: # This is default until option is selected by user
     for index, row in df.iterrows():
         
-        # Generate the indeed URL with query string based on job title
-        query = '?q=' + row['JOB CATEGORY'].replace(' ', '+') # vjk parameter is populated by indeed itself based on first job in listing
+        # Generate the indeed URL with query string based on job title and location
+        # vjk parameter is populated by indeed itself based on first job in listing
+        job_query = '?q=' + row['JOB CATEGORY'].replace(' ', '+') 
+        query = job_query + loc_query
         url = f"https://ca.indeed.com/jobs{query}"
         
         # Create indeed hyperlink for the row
@@ -63,5 +82,3 @@ if option != None: # This is default until option is selected by user
     # Display the HTML table
     st.markdown(html_table, unsafe_allow_html=True) 
     # **************Rendering this HTML in st is not good for security against XSS. We'll show it as a QA's concern however in our case we're not taking any input and our even our CSV files are not hosted on a public server but in actual production scenario an attack is possibile **************
-    
-    

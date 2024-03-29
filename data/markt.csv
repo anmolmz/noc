@@ -1,9 +1,9 @@
-"JOB CATEGORY",NOC TEER
-"Sales, Marketing and Advertising Managers",0
-"Retail Trade Managers",0
-"Business Development Officers",1
-"Marketing Researchers",1
-"Consultants",2
-"Professional Occupations in Business Services to Management",2
-"Professional Occupations in Public Relations and Communications",2
-"Retail Trade Supervisors",2
+JOB CATEGORY,NOC TEER,DESCRIPTION
+"Sales, Marketing and Advertising Managers",0,"description goes here"
+"Retail Trade Managers",0,"description goes here"
+"Business Development Officers",1,"description goes here"
+"Marketing Researchers",1,"description goes here"
+"Consultants",2,"description goes here"
+"Professional Occupations in Business Services to Management",2,"description goes here"
+"Professional Occupations in Public Relations and Communications",2,"description goes here"
+"Retail Trade Supervisors",2,"description goes here"

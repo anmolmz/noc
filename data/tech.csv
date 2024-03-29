@@ -1,11 +1,11 @@
-"JOB CATEGORY",NOC TEER
-"Enterprise network system administration",2
-"Information system security",2
-"Web design, development and integration",2
-"Mobile software application development",2
-"Software analysis design and development",2
-"Software quality assurance, testing and validation",2
-"Enterprise resource planning (ERP) systems implementation",2
-"Project management",2
-"Hardware and software technical support",2
-"Wireless systems development",2
+JOB CATEGORY,NOC TEER,DESCRIPTION
+"Enterprise network system administration",2,"description goes here"
+"Information system security",2,"description goes here"
+"Web design, development and integration",2,"description goes here"
+"Mobile software application development",2,"description goes here"
+"Software analysis design and development",2,"description goes here"
+"Software quality assurance, testing and validation",2,"description goes here"
+"Enterprise resource planning (ERP) systems implementation",2,"description goes here"
+"Project management",2,"description goes here"
+"Hardware and software technical support",2,"description goes here"
+"Wireless systems development",2,"description goes here"

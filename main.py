@@ -37,12 +37,12 @@ option_df_dict = {
 df = pd.DataFrame()
 
 # Get the DataFrame based on 'option'(degree) selected by user from drop down menu
-df = option_df_dict.get(option, df) # defaults to empty dataframe until option is selected
+df = option_df_dict.get(option, df) # defaults to empty dataframe until option is selected and we have the key in dictionary
 
 # Display the information when option is selected
-# Before that create an empty string to store the HTML content because if I render each row individually, header will appear each time
+# Before that create an empty string to store the HTML content because if each row is rendered individually, header and index will appear each time
 html_content = ""
-if option != None:
+if option != None: # This is default until option is selected by user
     for index, row in df.iterrows():
         
         # Generate the indeed URL with query string based on job title
@@ -50,14 +50,15 @@ if option != None:
         url = f"https://ca.indeed.com/jobs{query}"
         
         # Create indeed hyperlink for the row
-        hyperlink_text = 'Try it!'
-        hyperlink =  f"<a href='{url}'>{hyperlink_text}</a>"
+        hyperlink_text = "Job Search"
+        hyperlink =  f"<a style='text-decoration: none;' href='{url}'>{hyperlink_text}</a>"
 
-        # Add the row's HTML content with hyperlink to the overall HTML content
-        html_content += f"<tr><td>{row['JOB CATEGORY']}</td><td>{row['NOC TEER']}</td><td>{hyperlink}</td></tr>"
+        # Add the row's HTML content with hyperlink and tooltip to the overall HTML content
+        # TODO: using br tag to organize a little but there should be some better way
+        html_content += f"<tr><td>{row['JOB CATEGORY']}<br><span title='{row['DESCRIPTION']}'><i>Description</i></span><br>{hyperlink}</td><td>{row['NOC TEER']}</td></tr>"
     
     # Concatenate the HTML content for the table
-    html_table = f"<table><tr><th>JOB CATEGORY</th><th>NOC TEER</th><th>Search Job</th></tr>{html_content}</table>"
+    html_table = f"<table><tr><th>JOB CATEGORY</th><th>NOC TEER</th></tr>{html_content}</table>"
 
     # Display the HTML table
     st.markdown(html_table, unsafe_allow_html=True) 

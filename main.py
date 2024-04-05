@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import requests
+import ipinfo
+
 
 st.write('''
         # Find your career paths and respective NOC teer!
@@ -40,21 +42,26 @@ df = pd.DataFrame()
 # Get the DataFrame based on 'option'(degree) selected by user from drop down menu
 df = option_df_dict.get(option, df) # defaults to empty dataframe until option is selected and we have the key in dictionary
 
-# Retreiving the IP address of user and then location data from IP add. using two APIs ipify and ipapi
+# Retreiving the IP address of user and then location data from IP add. using two APIs ipify and ipinfo
 def get_ip(): 
     response = requests.get('https://api64.ipify.org?format=json').json()
     return response["ip"]
 
 def get_location(): 
     ip_address = get_ip()
-    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
-    return response.get("city")
-# It sometimes return None when the program is run initially as the location is not fetched.
+    access_token = '483892b4a02714'
+    handler = ipinfo.getHandler(access_token)
+    details = handler.getDetails(ip_address)
+    city = details.city
+    return city
 
-city = get_location() 
+city = get_location()
  
 # creating location query to be used for indeed search
-loc_query = '&l=' + str(city)
+if city != None:
+    loc_query = '&l=' + str(city)
+else:
+    loc_query = '&l=British+Columbia'
 
 # Display the information when option is selected
 # Before that create an empty string to store the HTML content because if each row is rendered individually, header and index will appear each time
@@ -82,3 +89,4 @@ if option != None: # This is default until option is selected by user
     # Display the HTML table
     st.markdown(html_table, unsafe_allow_html=True) 
     # **************Rendering this HTML in st is not good for security against XSS. We'll show it as a QA's concern however in our case we're not taking any input and our even our CSV files are not hosted on a public server but in actual production scenario an attack is possibile **************
+

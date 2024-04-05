@@ -49,7 +49,7 @@ def get_ip():
 
 def get_location(): 
     ip_address = get_ip()
-    access_token = '483892b4a02714'
+    access_token = '483892b4a02714' # This access token is issued on my personal email, max. 50,000 reqs/month
     handler = ipinfo.getHandler(access_token)
     details = handler.getDetails(ip_address)
     city = details.city

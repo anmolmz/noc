@@ -2,7 +2,14 @@ import streamlit as st
 import pandas as pd
 import requests
 import ipinfo
+from dotenv import load_dotenv
+import os
 
+# Load variables from the .env file into the environment
+load_dotenv()
+
+# Access the environment variables
+access_token = os.getenv("ACCESS_TOKEN")
 
 st.write('''
         # Find your career paths and respective NOC teer!
@@ -49,7 +56,7 @@ def get_ip():
 
 def get_location(): 
     ip_address = get_ip()
-    access_token = '483892b4a02714' # This access token is issued on my personal email, max. 50,000 reqs/month
+    access_token = access_token # This access token is issued on my personal email, max. 50,000 reqs/month
     handler = ipinfo.getHandler(access_token)
     details = handler.getDetails(ip_address)
     city = details.city

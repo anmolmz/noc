@@ -13,7 +13,7 @@ access_token = os.getenv("ACCESS_TOKEN")
 # This access token is issued on my personal email (malkito), max. 50,000 reqs/month
 
 #Adding image path
-image_path = 'img\cover_cropped.jpg'
+image_path = 'img\\cover_cropped.jpg'
 
 st.write('''
         # Find your career paths and respective NOC teer!

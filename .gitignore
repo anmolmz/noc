@@ -1,1 +1,1 @@
-.env
+# Had to add .env to github for streamlit app to deploy from the Github repo

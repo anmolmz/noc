@@ -12,9 +12,13 @@ load_dotenv()
 access_token = os.getenv("ACCESS_TOKEN")
 # This access token is issued on my personal email (malkito), max. 50,000 reqs/month
 
+#Adding image path
+image_path = 'img\cover_cropped.jpg'
+
 st.write('''
         # Find your career paths and respective NOC teer!
          ''')
+st.image(image_path)
 
 # Drop down for degree options
 option = st.selectbox(
@@ -84,11 +88,11 @@ if option != None: # This is default until option is selected by user
         
         # Create indeed hyperlink for the row
         hyperlink_text = "Job Search"
-        hyperlink =  f"<a style='text-decoration: none;' href='{url}'>{hyperlink_text}</a>"
+        hyperlink =  f"<a style='text-decoration: none; ' href='{url}'>{hyperlink_text}</a>"
 
         # Add the row's HTML content with hyperlink and tooltip to the overall HTML content
         # TODO: using br tag to organize a little but there should be some better way
-        html_content += f"<tr><td>{row['JOB CATEGORY']}<br><span title='{row['DESCRIPTION']}'><i>Description</i></span><br>{hyperlink}</td><td>{row['NOC TEER']}</td></tr>"
+        html_content += f"<tr><td><span title='{row['DESCRIPTION']}'><b>{row['JOB CATEGORY']}</b></span><br>{hyperlink}</td><td>{row['NOC TEER']}</td></tr>"
     
     # Concatenate the HTML content for the table
     html_table = f"<table><tr><th>JOB CATEGORY</th><th>NOC TEER</th></tr>{html_content}</table>"

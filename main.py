@@ -10,6 +10,7 @@ load_dotenv()
 
 # Access the environment variables
 access_token = os.getenv("ACCESS_TOKEN")
+# This access token is issued on my personal email (malkito), max. 50,000 reqs/month
 
 st.write('''
         # Find your career paths and respective NOC teer!
@@ -56,7 +57,6 @@ def get_ip():
 
 def get_location(): 
     ip_address = get_ip()
-    access_token = access_token # This access token is issued on my personal email, max. 50,000 reqs/month
     handler = ipinfo.getHandler(access_token)
     details = handler.getDetails(ip_address)
     city = details.city
